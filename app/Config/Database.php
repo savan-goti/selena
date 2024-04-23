@@ -24,12 +24,25 @@ class Database extends Config
      *
      * @var array<string, mixed>
      */
+
+     $localServerhost = array('localhost');
+    if (isset($_SERVER['HTTP_HOST']) && (in_array($_SERVER['HTTP_HOST'],$localServerhost))) {
+        $hostname = "localhost";
+        $dbName = "selena";
+        $dbUserName = "root";
+        $dbPwd = "";
+    } else {
+        $hostname = "localhost";
+        $dbName = "";
+        $dbUserName = "";
+        $dbPwd = "";
+    }
     public array $default = [
         'DSN'          => '',
-        'hostname'     => 'localhost',
-        'username'     => '',
-        'password'     => '',
-        'database'     => '',
+        'hostname'     => $hostname,
+        'username'     => $dbUserName,
+        'password'     => $dbPwd,
+        'database'     => $dbName,
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,
