@@ -93,13 +93,12 @@ define('EVENT_PRIORITY_NORMAL', 100);
  */
 define('EVENT_PRIORITY_HIGH', 10);
 
-
 //define table name
 $base_url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
 $base_url .= "://". @$_SERVER['HTTP_HOST'];
 $base_url .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 define('BASE_URL' , $base_url);
 define('SITE_TITLE' , 'Sheet');
-define('ASSETS_PATH' , BASE_URL.'public/assets/');
-define('ADMIN_ASSETS_PATH' , BASE_URL.'public/admin_assets/');
+define('ASSETS_PATH' , BASE_URL.'assets/');
+define('ADMIN_ASSETS_PATH' , BASE_URL.'admin_assets/');
 define('DB_PREFIX' , 'tbl');
