@@ -1,20 +1,15 @@
-<?php
-$favicon = (isset($this->setting_data['favicon']) && !empty($this->setting_data['favicon']))?  base_url().UPLOAD.$this->setting_data['favicon']:ADMIN_ASSETS_PATH."img/favicon.ico";
-?>
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="<?php echo ADMIN_ASSETS_PATH; ?>" data-template="vertical-menu-template">
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="../../assets/" data-template="vertical-menu-template">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <title><?=(isset($title)) ? $title . ' | ' . SITE_TITLE : SITE_TITLE;?></title>
     <!-- Canonical SEO -->
-    <link rel="canonical" href="<?= base_url() ?>">
-    <link rel="manifest" href="manifest.json">
+    <link rel="canonical" href="<?=base_url()?>">
+
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?php echo $favicon; ?>" />
-    <link rel="apple-touch-icon" href="<?= base_url('pwa/icons/icon-192x192.png') ?>" />
-    <meta name=theme-color content="#d6272b" />
+    <link rel="icon" type="image/x-icon" href="<?php echo ADMIN_ASSETS_PATH; ?>img/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -30,7 +25,7 @@ $favicon = (isset($this->setting_data['favicon']) && !empty($this->setting_data[
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/css/rtl/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/css/rtl/theme-semi-dark.css" class="template-customizer-theme-css" type="text/css" >
+    <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>css/demo.css" />
 
     <!-- responsive datatable -->
@@ -41,61 +36,38 @@ $favicon = (isset($this->setting_data['favicon']) && !empty($this->setting_data[
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/libs/tagify/tagify.css" />
-    <link rel="stylesheet" type="text/css" href="<?= ADMIN_ASSETS_PATH ?>vendor/libs/simpleLightbox/simpleLightbox.min.css" />
+
     
+    <!-- Print page -->
+    <a href="http://stackoverflow.com/questions/468881/print-div-id-printarea-div-only"></a>
+
+
     <!-- <link rel="stylesheet" type="text/css" href="<?php echo ADMIN_ASSETS_PATH; ?>css/plugins/forms/validation/form-validation.css"> -->
     <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/libs/formvalidation/dist/css/formValidation.min.css" />
-    <!-- <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/libs/swiper/swiper.css" />
-    <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/css/pages/ui-carousel.css" /> -->
     <!-- Page CSS -->
-    
     <!-- Helpers -->
     <script src="<?php echo ADMIN_ASSETS_PATH; ?>vendor/js/helpers.js"></script>
     <script src="<?php echo ADMIN_ASSETS_PATH; ?>js/config.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="<?php echo ADMIN_ASSETS_PATH; ?>css/custom-theme.css?v=<?= date("YmdH"); ?>">
+    <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/libs/quill/typography.css" />
+    <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/libs/quill/editor.css" />
+        
+    <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/libs/select2/select2.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo ADMIN_ASSETS_PATH; ?>css/custom.css?v=<?= date("YmdH"); ?>">
+    
+    <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/libs/html5-editor/bootstrap-wysihtml5.css" />
 
-    <!-- PushAlert -->
-    <!-- <script type="text/javascript">
-            (function(d, t) {
-                    var g = d.createElement(t),
-                    s = d.getElementsByTagName(t)[0];
-                    g.src = "https://cdn.pushalert.co/integrate_e916142c5d1eea85e63c7ff5f5b03f17.js";
-                    s.parentNode.insertBefore(g, s);
-            }(document, "script"));
-    </script> -->
-    <!-- End PushAlert -->
 
-    <!-- OneSignal Setup -->
-    <?php 
-    $onesignal_app_id = !empty($this->setting_data['onesignal_app_id'])? $this->setting_data['onesignal_app_id']:"";
-    ?>
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-        OneSignal.init({
-            appId: "<?= $onesignal_app_id ?>",
-        });
-    });
-    </script>
-    <script src="<?= base_url(); ?>script.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo  ADMIN_ASSETS_PATH; ?>css/magnific-popup.css">
+    
+    
+
+    
 </head>
 
 <body>
-<input type="hidden" id="base" value="<?=base_url(); ?>" />
-<input type="hidden" id="defaultImagePath" value="<?= ADMIN_ASSETS_PATH.'img/avatars/9.png' ?>" />
-<script>
-    var defaultImagePath = $('#defaultImagePath').val();
-    function imgError(image) {
-        image.onerror = "";
-        image.src = defaultImagePath;
-        return true;
-    }
-</script>
+<input type="hidden" id="base" value="<?=base_url()?>" />
 <!-- Layout wrapper -->
-<div class="layout-wrapper layout-content-navbar  ">
+<div class="layout-wrapper layout-content-navbar">
 <div class="layout-container">
+
+    

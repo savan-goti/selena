@@ -7,6 +7,7 @@ use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\HTTP\URL;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -54,5 +55,24 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+    }
+    
+    public function renderAdmin($data=""){
+        // pr($data);die;
+        echo view('backend/layout/header', $data);
+        echo view('backend/layout/sidebar', $data);
+        echo view('backend/layout/navbar', $data);
+        
+        // if(!empty($data['view'])){
+        //     if(is_array($data['view'])){
+        //         foreach($data['view'] as $view){
+        //             echo view($view);
+        //         }
+        //         // $this->load->view($data['view']);
+        //     }else{
+        //         echo view($data['view']);
+        //     }
+        // }
+        // echo view('backend/layout/footer', $data);
     }
 }

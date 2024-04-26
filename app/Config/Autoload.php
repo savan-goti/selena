@@ -90,5 +90,5 @@ class Autoload extends AutoloadConfig
      *
      * @var list<string>
      */
-    public $helpers = ['url', 'file', 'security', 'common','datatables_helper'];
+    public $helpers = ['url', 'form', 'file', 'security', 'common','datatables_helper'];
 }

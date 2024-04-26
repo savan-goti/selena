@@ -2,75 +2,73 @@
 
 namespace App\Controllers\backend;
 
+use App\Models\LoginModel;
+
 class Auth extends BaseController
 {
-    public function __construct() {
-        // parent::__construct();
+    public function __construct()
+    {
+        // helper(['url','form']);
     }
 
     public function index()
     {
-        // if ($this->session->has_userdata('is_admin_login')) {
-        //     return base_url('backend/dashbord');
-        // } else {
-        //     return base_url('login');
-        // }
+        return redirect()->to(BASE_URL.'backend');
     }
 
     public function login()
     {
-        // pr('test');die;
+        if(!empty($this->request->getPost('submit'))){
+            $rule = [
+                'email'   => 'required|valid_email',
+                'password' => 'required|min_length[5]|max_length[12]',
+            ];
+    
+            if(!$this->validate($rule)){
+                return view('backend/auth/login',['validation'=> $this->validator]);
+            }else{
+    
+                $email = $this->request->getPost('email');
+                $password = $this->request->getPost('password');
 
-        // if ($this->session->has_userdata('is_admin_login')) {
-        //     redirect('backend/dashbord');
-        // }
+                $loginmodel = new LoginModel();
+
+                $data = array(
+                    'email' => $email,
+                    'password' => $password
+                );
+                
+                $userData = $loginmodel->where('email',$email)->first();
+
+                if(!empty($userData)){
+                    if((md5($data['password']) == $userData['password'] && $userData['user_role']=='1' && $userData['is_active']=='1' && $userData['is_delete']=='0' )){
+                        $admin_data = array(
+                            'admin_id' => $userData['user_id'],
+                            'username' => $userData['username'],
+                            'name' => $userData['name'].' '.$userData['last_name'],
+                            'email' => $userData['email'],
+                            'is_admin_login' => TRUE,
+                            'user_type' => 1,
+                        );
+                        session()->set('admin_login',$admin_data);
+                        return redirect()->to(BASE_URL.'backend/dashboard');
+                    }else{
+                        return view('backend/auth/login',['msg'=> 'Incorrect Password']);
+                    }
+                }else{
+                    return view('backend/auth/login',['msg'=> 'Incorrect Email Or Password']);
+                }
+            }
+        }
+
         return view('backend/auth/login');
     }
     
-    public function save()
-    {
-        echo 'test';die;
-
-        $validation = $this->validate([
-            'email' => [
-                'rules' => 'required|valid_email|is_not_unique[registration.email]',
-                'errors' => [
-                    'required' => 'E-Mail is Required',
-                    'valid_email' => 'You Must Enter a Valid E-Mail',
-                    'is_not_unique' => 'This E-Mail Is Not Registered on our Service'
-                ]
-                ],
-            'password' => [
-                'rules' => 'required|min_length[5]|max_length[12]',
-                'errors' => [
-                    'required' => 'password is Required',
-                    'min_length' => 'password Must Have atleast 5 chaacters in Length',
-                    'max_length' => 'password Must Not Have chaacters More Than 12 in Length'
-                ]
-            ]
-        ]);
-
-        if(!$validation){
-            return view('admin/login',['validation'=> $this->validator]);
-        }else{
-
-            $email = $this->request->getPost('email');
-            $password = $this->request->getPost('password');
-
-            $usermodel = new LoginModel();
-            $user_info = $usermodel->where('email',$email)->first();
-            $chack_password = Hash::check($password, $user_info['password']);
-
-            if($chack_password){
-
-                $user_id = $user_info['id'];
-                session()->set('loggedUser',$user_id);
-
-                return redirect()->to('/dashbord');
-            }else{
-                session()->setFlashdata('faile','Incorrect Password');
-                return redirect()->to('/login')->withInput();
-            }
+    public function logout(){
+        if(session()->get('admin_login')){
+            session()->remove('admin_login');
+            return redirect()->to(BASE_URL.'backend/login')->with('faile','Your are Logged out!');
         }
     }
+
 }
