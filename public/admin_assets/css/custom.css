@@ -140,3 +140,67 @@ form .form-group label.control-label {
 .page_changelog .font-weight-bold {
     font-weight: 700;
 }
+
+#offcanvasRecordSignature .kbw-signature, #offcanvasRecordSignature .loadSignImg svg, .recordSignatureView .loadSignImg svg{
+    width: 300px;
+    height: 200px;
+}
+
+#offcanvasRecordSignature .loadSignImg img, .recordSignatureView .loadSignImg img{
+    width: 275px;
+    height: 200px;
+    object-fit: contain;
+}
+
+#offcanvasRecordSignature .loadSignImg{
+    border: 2px solid #77777747;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 300px;
+}
+
+.recordImageView .mylightgallery img{
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
+.leaflet-map .my_map_icon_div .my_map_icon_img{
+    height: 30px;
+    width: 28px;
+}
+.leaflet-map .my_map_icon_div .my_map_icon_text{
+    background: #d6272b;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 2px 10px 1px 10px;
+    border-radius: 10px;
+}
+
+/*.krajee-default.file-preview-frame .kv-file-content.editImageDiv{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
+}
+.krajee-default.file-preview-frame .kv-file-content .img50{
+    width: 50% !important;
+}*/
+
+.divRecordImagesTypeedited .timeline_img{
+    width: 213px;
+    height: 160px;
+    object-fit: contain;
+}
+
+.bglight_error{
+    background-color: #d6272b38 !important;
+    color: black;
+}
+
+.download_img{
+    height: 120px !important;
+}

@@ -13,7 +13,12 @@ $company_logo = isset($this->setting_data['company_logo']) ? base_url(UPLOAD . $
         
         <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
           <ul class="navbar-nav flex-row align-items-center ms-auto">
-            <li> <span class="user-name"><?= $loggedUserId['name']; ?></span></li>
+            <li> 
+              <a class="dropdown-item" href="<?php echo base_url('backend/logout'); ?>"> <i class="bx bx-power-off text-white"></i> </a>
+            </li>
+            <li> 
+              <span class="user-name"><?= $loggedUserId['name']; ?></span>
+            </li>
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                   <div class="avatar avatar-online">
@@ -21,7 +26,7 @@ $company_logo = isset($this->setting_data['company_logo']) ? base_url(UPLOAD . $
                   </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="<?php echo base_url('backend/logout'); ?>" target="_blank"> <i class="bx bx-power-off me-2"></i> <span class="align-middle">Log Out</span> </a></li>
+                    <li><a class="dropdown-item" href="<?php echo base_url('backend/logout'); ?>"> <i class="bx bx-power-off me-2"></i> <span class="align-middle">Log Out</span> </a></li>
                 </ul> 
             </li> 
           </ul>

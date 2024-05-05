@@ -188,7 +188,7 @@ function _table_jump_to_page(table, oSettings) {
     }
 }
 
-initDataTable = function(selector, url, notsearchable, notsortable, fnserverparams, defaultorder) {
+initDataTable = function(selector, url, notsearchable, notsortable, fnserverparams, defaultorder, remove_column_search = 0) {
     var table = typeof(selector) == 'string' ? $("body").find('table' + selector) : selector;
     if (table.length === 0) {
         return false;
@@ -222,8 +222,8 @@ initDataTable = function(selector, url, notsearchable, notsortable, fnserverpara
         }
     }
 
-    var length_options = [10, 25, 50, 100];
-    var length_options_names = [10, 25, 50, 100];
+    var length_options = [5, 10, 25, 50, 100, 200, 500];
+    var length_options_names = [5, 10, 25, 50, 100, 200, 500];
 
     app_tables_pagination_limit = parseFloat(100);
 
@@ -312,6 +312,7 @@ initDataTable = function(selector, url, notsearchable, notsortable, fnserverpara
             }
             // $(document).CsrfAjaxGet();
         },
+        orderCellsTop: 1,
         "order": defaultorder,
         "ajax": {
             "url": url,
@@ -341,6 +342,21 @@ initDataTable = function(selector, url, notsearchable, notsortable, fnserverpara
         
         // buttons: get_datatable_buttons(table),
     };
+    
+    /*if(remove_column_search == 0){
+        $(selector+" thead tr").clone(!0).appendTo(selector+" thead");
+        $(selector+" thead tr:eq(1) th").each(function (a) {
+            if((notsearchable.includes(a) ) == true){
+                $(this).html('');
+            }else{
+                var t = $(this).text();
+                $(this).html('<input type="text" class="form-control column_searchable" placeholder="Search ' + t + '" />');
+                 $("input.column_searchable", this).on("keyup change", function () {
+                    table.api().columns(a).search() !== this.value && table.api().columns(a).search(this.value).draw();
+                });
+            }
+        });
+    }*/
 
     if (table.hasClass('scroll-responsive')) {
         dtSettings.responsive = false;

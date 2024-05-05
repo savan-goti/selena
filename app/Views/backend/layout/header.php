@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="../../assets/" data-template="vertical-menu-template">
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-default" data-assets-path="<?php echo ADMIN_ASSETS_PATH; ?>" data-template="vertical-menu-template">
 
 <head>
     <meta charset="utf-8" />
@@ -54,17 +54,11 @@
     <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/libs/select2/select2.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo ADMIN_ASSETS_PATH; ?>css/custom.css?v=<?= date("YmdH"); ?>">
     
-    <link rel="stylesheet" href="<?php echo ADMIN_ASSETS_PATH; ?>vendor/libs/html5-editor/bootstrap-wysihtml5.css" />
-
-
-    <link rel="stylesheet" type="text/css" href="<?php echo  ADMIN_ASSETS_PATH; ?>css/magnific-popup.css">
-    
-    
-
     
 </head>
 
 <body>
+<input type="hidden" id="assetsPath" value="<?=ADMIN_ASSETS_PATH;?>" />
 <input type="hidden" id="base" value="<?=base_url()?>" />
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">

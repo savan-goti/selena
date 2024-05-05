@@ -10,6 +10,15 @@ use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\HTTP\URL;
 use Psr\Log\LoggerInterface;
 
+
+use App\Models\BannerModel;
+use App\Models\TypeModel;
+use App\Models\UserModel;
+use App\Models\UserRoleModel;
+use App\Models\SettingModel;
+use App\Models\LanguageModel;
+use App\Models\LanguageKeyModel;
+
 /**
  * Class BaseController
  *
@@ -38,6 +47,22 @@ abstract class BaseController extends Controller
      */
     protected $helpers = [];
 
+    public function __construct()
+    {
+        $this->viewPath = realpath(APPPATH . 'views');
+        
+        $this->type = new TypeModel();
+        $this->banner = new BannerModel();
+        $this->user = new UserModel();
+        $this->user_role = new UserRoleModel();
+        $this->setting = new SettingModel();
+        $this->language = new LanguageModel();
+        $this->language_key = new LanguageKeyModel();
+
+        
+        $this->login_data = session()->get('admin_login');
+    }
+
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
@@ -63,16 +88,50 @@ abstract class BaseController extends Controller
         echo view('backend/layout/sidebar', $data);
         echo view('backend/layout/navbar', $data);
         
-        // if(!empty($data['view'])){
-        //     if(is_array($data['view'])){
-        //         foreach($data['view'] as $view){
-        //             echo view($view);
-        //         }
-        //         // $this->load->view($data['view']);
-        //     }else{
-        //         echo view($data['view']);
-        //     }
-        // }
-        // echo view('backend/layout/footer', $data);
+        if(!empty($data['view'])){
+            if(is_array($data['view'])){
+                foreach($data['view'] as $view){
+                    echo view($view);
+                }
+            }else{
+                echo view($data['view']);
+            }
+        }
+        echo view('backend/layout/footer', $data);
     }
+
+    
+    protected function get_table_data($table, $params = [], $is_front=false)
+    {
+        foreach ($params as $key => $val) {
+            $$key = $val;
+        }
+        $customFieldsColumns = [];
+        if($is_front){
+            $path = realpath(APPPATH . 'views').'/front/tables/' . $table . '.php';
+            if (file_exists(realpath(APPPATH . 'views') . 'front/tables/my_' . $table . '.php')) {
+                $path = realpath(APPPATH . 'views') . 'front/tables/my_' . $table . '.php';
+            }
+        }else{
+            $path = realpath(APPPATH . 'views').'/backend/tables/' . $table . '.php';
+            if (file_exists(realpath(APPPATH . 'views') . '/backend/tables/my_' . $table . '.php')) {
+                $path = realpath(APPPATH . 'views') . '/backend/tables/my_' . $table . '.php';
+            }
+        }
+        include_once($path);
+        echo json_encode($output);
+        exit;
+    }
+    
+    public function getNotification($key=""){
+        $result = "No notification found";
+        if(!empty($key)){
+            $notificationData = $this->language_key->get_row(array('is_active' => 1,'key' => $key));
+            if(!empty($notificationData)){
+                $result = $notificationData['value_en'];
+            }
+        }
+        return $result;
+    }
+    
 }

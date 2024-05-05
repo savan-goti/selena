@@ -102,3 +102,22 @@ define('SITE_TITLE' , 'Sheet');
 define('ASSETS_PATH' , BASE_URL.'assets/');
 define('ADMIN_ASSETS_PATH' , BASE_URL.'admin_assets/');
 define('DB_PREFIX' , 'tbl');
+
+
+define('TBL_USERS' , DB_PREFIX . 'user');
+define('TBL_USER_ROLE' , DB_PREFIX . 'user_role');
+define('TBL_BANNER' , DB_PREFIX . 'banner');
+define('TBL_TYPE' , DB_PREFIX . 'type');
+define('TBL_SETTING' , DB_PREFIX . 'setting');
+define('TBL_LANGUAGE' , DB_PREFIX . 'language');
+define('TBL_LANGUAGE_KEY' , DB_PREFIX . 'language_key');
+
+//define folder name
+define('UPLOAD', 'upload/');
+define('PROFILE', UPLOAD . 'profile/');
+define('PICTURE', UPLOAD . 'picture/');
+define('BANNER', UPLOAD . 'banner/');
+
+define('DEFAULT_COUNTY_CODE', '+91');
+define('DROPBOX_TOKEN', '');
+define('DROPBOX_FOLDER_PATH', '');
