@@ -170,6 +170,47 @@ function delete_confirmation() {
             }
 
         });
+        
+        initDataTable('.table-category', baseUrl + 'backend/category/getAjaxListData', [], []);
+        $(document).delegate(".category_switch", "change", function (event) {
+            var status = 0;
+            var record_id = $(this).val();
+            if (this.checked) {
+                status = 1;
+            }
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "backend/category/change_status",
+                data: {
+                    status: status,
+                    record_id: record_id
+                },
+                success: function (result) {
+
+                }
+            });
+        });
+        $(document).delegate(".deletecategory", "click", function (event) {
+            if (delete_confirmation()) {
+                var el = $(this);
+                var record_id = $(this).attr('data-id');
+                if (record_id) {
+                    $.ajax({
+                        type: 'POST',
+                        url: baseUrl + 'backend/category/delete',
+                        data: {
+                            record_id: record_id
+                        },
+                        success: function (response) {
+                            if (response) {
+                                el.closest("tr").hide();
+                            }
+                        }
+                    });
+                }
+            }
+
+        });
 
     });
 })(jQuery, window, document);

@@ -111,12 +111,14 @@ define('TBL_TYPE' , DB_PREFIX . 'type');
 define('TBL_SETTING' , DB_PREFIX . 'setting');
 define('TBL_LANGUAGE' , DB_PREFIX . 'language');
 define('TBL_LANGUAGE_KEY' , DB_PREFIX . 'language_key');
+define('TBL_CATEGORY' , DB_PREFIX . 'category');
 
 //define folder name
 define('UPLOAD', 'upload/');
 define('PROFILE', UPLOAD . 'profile/');
 define('PICTURE', UPLOAD . 'picture/');
 define('BANNER', UPLOAD . 'banner/');
+define('CATEGORY', UPLOAD . 'category/');
 
 define('DEFAULT_COUNTY_CODE', '+91');
 define('DROPBOX_TOKEN', '');

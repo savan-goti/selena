@@ -204,3 +204,8 @@ form .form-group label.control-label {
 .download_img{
     height: 120px !important;
 }
+
+#colorpicker {
+    width: 110px;
+    height: 40px;
+}

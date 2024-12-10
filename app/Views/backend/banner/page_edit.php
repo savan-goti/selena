@@ -30,7 +30,7 @@
                             <div class="form-group mb-2">
                                 <label for="date" class="control-label">Link</label>
                                 <div class="input-group">
-                                    <input type="text" name="url" class="form-control" id="link" placeholder="Enter link" value="<?=isset($rowData['url']) ? $rowData['url'] : ''; echo set_value('title'); ?>" />
+                                    <input type="text" name="url" class="form-control" id="link" placeholder="Enter link" value="<?=isset($rowData['url']) ? $rowData['url'] : ''; echo set_value('url'); ?>" />
                                 </div>
                             </div>
                               

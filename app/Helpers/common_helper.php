@@ -389,33 +389,6 @@ function nl2listview($str, $tag = 'ul', $class = '')
 
 function getAddressFromLatlong($lat, $long)
 {
-    /*$result = "";
-    $CI = &get_instance();
-    $setting_data = $CI->setting_data;
-    $geocode_apikey = (!empty($setting_data['geocode_apikey'])) ? $setting_data['geocode_apikey'] : "";
-    $dataArray = json_decode(@file_get_contents("https://geocode.xyz/".$lat.",".$long."?json=1&authcode=".$geocode_apikey), true);
-    if(!empty($dataArray)){
-        // if(isset($dataArray['alt']['loc'][0]['staddress'])){
-        //     $address[] = $dataArray['alt']['loc'][0]['staddress'];
-        // }
-        if(isset($dataArray['staddress'])){
-            $address[] = $dataArray['staddress'];
-        }
-        if(isset($dataArray['city'])){
-            $address[] = $dataArray['city'];
-        }
-        if(isset($dataArray['state'])){
-            $address[] = $dataArray['state'];
-        }
-        if(isset($dataArray['country'])){
-            $address[] = $dataArray['country'];
-        }
-        if(!empty($address)){
-            $result = implode(', ', $address);
-        }
-    }
-    return $result;*/
-
     $result = "";
     $apiUrl = "https://nominatim.openstreetmap.org/reverse?lat=".$lat."&lon=".$long."&format=json&email=".FROM_EMAIL;
     $ch = curl_init();

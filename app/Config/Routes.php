@@ -35,5 +35,17 @@ $routes->group('' ,['filter'=>'auth'], function($routes){
     $routes->post('backend/banner/change_status', 'backend\Banner::change_status');
     $routes->post('backend/banner/delete', 'backend\Banner::delete');
 
+    // Category
+    $routes->match(['get', 'post'],'backend/category', 'backend\Category::index');
+    $routes->post('backend/category/getAjaxListData', 'backend\Category::getAjaxListData');
+    $routes->match(['get', 'post'],'backend/category/add', 'backend\Category::add');
+    $routes->match(['get', 'post'],'backend/category/edit/(:num)', 'backend\Category::add/$1');
+    $routes->post('backend/category/change_status', 'backend\Category::change_status');
+    $routes->post('backend/category/delete', 'backend\Category::delete');
+
+
 });
+
+
+$routes->get('login', 'Home::login');
 

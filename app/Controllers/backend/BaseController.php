@@ -18,6 +18,7 @@ use App\Models\UserRoleModel;
 use App\Models\SettingModel;
 use App\Models\LanguageModel;
 use App\Models\LanguageKeyModel;
+use App\Models\CategoryModel;
 
 /**
  * Class BaseController
@@ -58,8 +59,8 @@ abstract class BaseController extends Controller
         $this->setting = new SettingModel();
         $this->language = new LanguageModel();
         $this->language_key = new LanguageKeyModel();
+        $this->category = new CategoryModel();
 
-        
         $this->login_data = session()->get('admin_login');
     }
 

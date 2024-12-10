@@ -5,8 +5,6 @@ namespace App\Controllers\backend;
 
 class Banner extends BaseController
 {
-    public function __construct() {
-    }
 
     public function index()
     {
@@ -27,6 +25,7 @@ class Banner extends BaseController
         $data['menu']='ADD BANNER';
         $data['title']='ADD BANNER';
 
+        
         $data['type']=$this->type->where(array('is_active'=>1,'is_delete'=>0))->findAll();
         // pr($data['type']);die;
 
